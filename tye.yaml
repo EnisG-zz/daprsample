@@ -1,0 +1,34 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: dapr
+extensions:
+- name: dapr
+
+  # log-level configures the log level of the dapr sidecar
+  log-level: debug
+
+services:
+- name: OrderService
+  project: OrderService/OrderService.csproj
+- name: InventoryService
+  project: InventoryService/InventoryService.csproj
+
+# This may conflict with the redis instance that dapr manages.
+#
+# Doing a `docker ps` can show if its already running. If that's the case
+# then comment out out when running locally. 
+#- name: redis
+#  image: redis
+#  bindings: 
+#  - port: 6379
+# To ensure that your are running a dapr placement container with the right binding port.
+# (50005 as HostPort)
+#- name: placement
+#  image: daprio/dapr
+#  args: ./placement
+#  bindings:
+#    - port: 50005
